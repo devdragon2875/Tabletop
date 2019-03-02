@@ -32,10 +32,12 @@ public class Menu {
 				return 3;
 			}
 		} else if(type == MENU_GENERAL) {
-			if(pX >= x && pY >= y && pX<= x+MENU_WIDTH && pY<= y+MENU_HEIGHT/2) {
+			if(pX >= x && pY >= y && pX<= x+MENU_WIDTH && pY<= y+MENU_HEIGHT/3) {
 				return 1;
-			} else if(pX >= x && pY >= y + MENU_HEIGHT/2 && pX<= x+MENU_WIDTH && pY<= y+MENU_HEIGHT) {
+			} else if(pX >= x && pY >= y + MENU_HEIGHT/3 && pX<= x+MENU_WIDTH && pY<= y+2*MENU_HEIGHT/3) {
 				return 2;
+			} else if(pX >= x && pY >= y+2*MENU_HEIGHT/3 && pX<= x+MENU_WIDTH && pY<= y+MENU_HEIGHT) {
+				return 3;
 			}
 		}
 		return 0;
@@ -43,18 +45,44 @@ public class Menu {
 	
 	public void draw() {
 		if(type == MENU_DECK) {
-			drawer.fill(0, 0, 0);
+			drawer.fill(255);
+			drawer.text("Shuffle", x, y);
+			
+			drawer.fill(180, 0, 0);
 			drawer.rect(x, y, MENU_WIDTH, MENU_HEIGHT/3);
+			
+			drawer.fill(255);
+			drawer.text("Draw", x, y+MENU_HEIGHT/3);
+			
 			drawer.fill(0, 180, 0);
 			drawer.rect(x, y+MENU_HEIGHT/3, MENU_WIDTH, MENU_HEIGHT/3);
+			
+			drawer.fill(255);
+			drawer.text("Yiggity", x, y+2*+MENU_HEIGHT/3);
+			
 			drawer.fill(0, 0, 180);
 			drawer.rect(x, y+2*+MENU_HEIGHT/3, MENU_WIDTH, MENU_HEIGHT/3);
+			
 			drawer.fill(255);
 		} else if(type == MENU_GENERAL) {
+			drawer.fill(255);
+			drawer.text("Create Deck", x, y);
+			
+			drawer.fill(180, 0, 0);
+			drawer.rect(x, y, MENU_WIDTH, MENU_HEIGHT/3);
+			
+			drawer.fill(255);
+			drawer.text("Create Card", x, y+MENU_HEIGHT/3);
+			
 			drawer.fill(0, 180, 0);
-			drawer.rect(x, y, MENU_WIDTH, MENU_HEIGHT/2);
+			drawer.rect(x, y+MENU_HEIGHT/3, MENU_WIDTH, MENU_HEIGHT/3);
+			
+			drawer.fill(255);
+			drawer.text("Import Deck", x, y+2*+MENU_HEIGHT/3);
+			
 			drawer.fill(0, 0, 180);
-			drawer.rect(x, y+MENU_HEIGHT/2, MENU_WIDTH, MENU_HEIGHT/2);
+			drawer.rect(x, y+2*+MENU_HEIGHT/3, MENU_WIDTH, MENU_HEIGHT/3);
+			
 			drawer.fill(255);
 		}
 	}
