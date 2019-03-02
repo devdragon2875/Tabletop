@@ -31,7 +31,7 @@ public class Deck {
 	}
 	public boolean hasPoint(float pX, float pY) {
 		
-		return pX >= x && pY >= y && pX<= pX+DECK_WIDTH && pY<= pY+DECK_HEIGHT;
+		return (pX >= x && pY >= y && pX<= pX+DECK_WIDTH && pY<= pY+DECK_HEIGHT);
 		
 	}
 	public void draw() {
