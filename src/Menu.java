@@ -24,18 +24,17 @@ public class Menu {
 
 	public int clicked(float pX, float pY) {
 		if(type == MENU_DECK) {
-			if(pX >= x && pY >= y && pX<= pX+MENU_WIDTH && pY<= pY+MENU_HEIGHT/3) {
+			if(pX >= x && pY >= y && pX<= x+MENU_WIDTH && pY<= y+MENU_HEIGHT/3) {
 				return 1;
-			} else if(pX >= x && pY >= y + MENU_HEIGHT/3 && pX<= pX+MENU_WIDTH && pY<= pY+2*MENU_HEIGHT/3) {
+			} else if(pX >= x && pY >= y + MENU_HEIGHT/3 && pX<= x+MENU_WIDTH && pY<= y+2*MENU_HEIGHT/3) {
 				return 2;
-			} else if(pX >= x && pY >= y+2*MENU_HEIGHT/3 && pX<= pX+MENU_WIDTH && pY<= pY+MENU_HEIGHT) {
+			} else if(pX >= x && pY >= y+2*MENU_HEIGHT/3 && pX<= x+MENU_WIDTH && pY<= y+MENU_HEIGHT) {
 				return 3;
 			}
 		} else if(type == MENU_GENERAL) {
-			if(pX >= x && pY >= y && pX<= pX+MENU_WIDTH && pY<= pY+MENU_HEIGHT/2) {
+			if(pX >= x && pY >= y && pX<= x+MENU_WIDTH && pY<= y+MENU_HEIGHT/2) {
 				return 1;
-			} else if(pX >= x && pY >= y + MENU_HEIGHT/2 && pX<= pX+MENU_WIDTH && pY<= pY+MENU_HEIGHT) {
-				System.out.println("blue");
+			} else if(pX >= x && pY >= y + MENU_HEIGHT/2 && pX<= x+MENU_WIDTH && pY<= y+MENU_HEIGHT) {
 				return 2;
 			}
 		}
