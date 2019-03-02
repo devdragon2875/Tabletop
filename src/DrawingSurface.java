@@ -38,7 +38,7 @@ public class DrawingSurface extends PApplet {
 						
 					}
 					if(menu.clicked(mouseX, mouseY) == 2) {
-						menu.getDeck().draw();
+						menu.getDeck().move();
 					}
 					if(menu.clicked(mouseX, mouseY) == 3) {
 						
@@ -53,6 +53,7 @@ public class DrawingSurface extends PApplet {
 					}
 					
 				}
+				menu = null;
 			}
 			
 		} else if(mouseButton == RIGHT) {
