@@ -27,6 +27,9 @@ public class Deck extends Item{
 	
 	public Card move() {
 		System.out.println("moved");
+		if(deck.size()==0) {
+			return null;
+		}
 		return deck.remove(deck.size());
 	}
 	public boolean hasPoint(float pX, float pY) {
