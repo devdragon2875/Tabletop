@@ -24,6 +24,9 @@ public class DrawingSurface extends PApplet {
 		for(int i = 0; i < decks.size(); i++) {
 			decks.get(i).draw();
 		}
+		for(Card c : cards) {
+			c.draw();
+		}
 		if(menu != null) {
 			menu.draw();
 		}
