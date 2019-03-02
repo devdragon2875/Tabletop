@@ -1,15 +1,21 @@
+import processing.core.PApplet;
+import processing.core.PImage;
 
 public class Card {
-	private String imgpath;
+	private PApplet drawer;
+	private String upImg;
+	private String downImg;
 	private float x;
 	private float y;
 	private boolean isFaceDown;
 	
-	public Card(String imgpath, float x, float y, boolean facedown) {
-		this.imgpath = imgpath;
+	public Card(PApplet drawer, String upImg, String downImg, float x, float y, boolean facedown) {
+		this.upImg = upImg;
+		this.downImg = downImg;
 		this.x = x;
 		this.y = y;
 		isFaceDown = facedown;
+		this.drawer = drawer;
 	}
 	
 	
@@ -17,13 +23,16 @@ public class Card {
 		isFaceDown = !isFaceDown;
 	}
 	
+	public void draw() {
+		if(isFaceDown) {
+			PImage facedown = drawer.loadImage(downImg);
+			drawer.image(facedown, x, y, Deck.DECK_WIDTH, Deck.DECK_HEIGHT);
+		} else {
+			PImage faceup = drawer.loadImage(upImg);
+			drawer.image(faceup, x, y, Deck.DECK_WIDTH, Deck.DECK_HEIGHT);
+		}
+	}
 	//Getters and Setters
-	public String getImgpath() {
-		return imgpath;
-	}
-	public void setImgpath(String imgpath) {
-		this.imgpath = imgpath;
-	}
 	public float getX() {
 		return x;
 	}

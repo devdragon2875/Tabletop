@@ -10,7 +10,7 @@ public class DrawingSurface extends PApplet {
 	boolean dragged = false;
 	Menu menu;
 	ArrayList<Deck> decks = new ArrayList<Deck>();
-	
+	ArrayList<Card> cards = new ArrayList<Card>();
 	public void settings() {
 		size(1600,1000);
 	}
@@ -49,7 +49,7 @@ public class DrawingSurface extends PApplet {
 						decks.add(new Deck(this, null, menu.getX()+Menu.MENU_WIDTH/2-Deck.DECK_WIDTH/2, menu.getY()+Menu.MENU_HEIGHT-Deck.DECK_HEIGHT/2));
 					}
 					if(menu.clicked(mouseX, mouseY) == 2) {
-						
+						//cards.add(new Card(this, "faceup.png", "facedown.png", menu.getX()+Menu.MENU_WIDTH/2-Deck.DECK_WIDTH/2, menu.getY()+Menu.MENU_HEIGHT-Deck.DECK_HEIGHT/2, true));
 					}
 					
 				}
