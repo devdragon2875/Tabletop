@@ -3,21 +3,19 @@ import java.util.Collections;
 
 import processing.core.PApplet;
 
-public class Deck {
+public class Deck extends Item{
 	private ArrayList<Card> deck = new ArrayList<Card>();
-	private float x;
-	private float y;
 	public static final float DECK_WIDTH= 120;
 	public static final float DECK_HEIGHT = 160;
 	PApplet drawer;
 	
 	public Deck(PApplet drawer, ArrayList<Card> deck, float x, float y) {
+		super(x, y);
 		this.drawer = drawer;
 		if(deck != null) {
 			this.deck.addAll(deck);
 		}
-		this.x = x;
-		this.y = y;
+		
 	}
 	
 	public void shuffle() {

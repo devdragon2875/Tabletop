@@ -35,7 +35,6 @@ public class Menu {
 			if(pX >= x && pY >= y && pX<= x+MENU_WIDTH && pY<= y+MENU_HEIGHT/2) {
 				return 1;
 			} else if(pX >= x && pY >= y + MENU_HEIGHT/2 && pX<= x+MENU_WIDTH && pY<= y+MENU_HEIGHT) {
-				System.out.println("blue");
 				return 2;
 			}
 		}

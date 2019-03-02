@@ -1,19 +1,18 @@
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class Card {
+public class Card extends Item {
 	private PApplet drawer;
 	private PImage upImg;
 	private PImage downImg;
-	private float x;
-	private float y;
+	
 	private boolean isFaceDown;
 	
 	public Card(PApplet drawer, String upImg, String downImg, float x, float y, boolean facedown) {
+		super(x, y);
 		this.upImg = drawer.loadImage(upImg);
 		this.downImg = drawer.loadImage(downImg);
-		this.x = x;
-		this.y = y;
+		
 		isFaceDown = facedown;
 		this.drawer = drawer;
 	}
@@ -21,6 +20,11 @@ public class Card {
 	
 	public void flip() {
 		isFaceDown = !isFaceDown;
+	}
+	public boolean hasPoint(float pX, float pY) {
+		
+		return pX >= x && pY >= y && pX<= x+Deck.DECK_WIDTH && pY<= y+Deck.DECK_HEIGHT;
+		
 	}
 	
 	public void draw() {
