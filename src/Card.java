@@ -3,15 +3,15 @@ import processing.core.PImage;
 
 public class Card {
 	private PApplet drawer;
-	private String upImg;
-	private String downImg;
+	private PImage upImg;
+	private PImage downImg;
 	private float x;
 	private float y;
 	private boolean isFaceDown;
 	
 	public Card(PApplet drawer, String upImg, String downImg, float x, float y, boolean facedown) {
-		this.upImg = upImg;
-		this.downImg = downImg;
+		this.upImg = drawer.loadImage(upImg);
+		this.downImg = drawer.loadImage(downImg);
 		this.x = x;
 		this.y = y;
 		isFaceDown = facedown;
@@ -25,11 +25,9 @@ public class Card {
 	
 	public void draw() {
 		if(isFaceDown) {
-			PImage facedown = drawer.loadImage(downImg);
-			drawer.image(facedown, x, y, Deck.DECK_WIDTH, Deck.DECK_HEIGHT);
+			drawer.image(downImg, x, y, Deck.DECK_WIDTH, Deck.DECK_HEIGHT);
 		} else {
-			PImage faceup = drawer.loadImage(upImg);
-			drawer.image(faceup, x, y, Deck.DECK_WIDTH, Deck.DECK_HEIGHT);
+			drawer.image(upImg, x, y, Deck.DECK_WIDTH, Deck.DECK_HEIGHT);
 		}
 	}
 	//Getters and Setters
