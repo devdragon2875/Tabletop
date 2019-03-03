@@ -29,6 +29,10 @@ public class DrawingSurface extends PApplet {
 	public void draw() {
 		background(0, 0, 0);
 		for (int i = 0; i < decks.size(); i++) {
+			if(decks.get(i).isMovable()) {
+				decks.get(i).setX(mouseX-Deck.DECK_WIDTH/2);
+				decks.get(i).setY(mouseY-Deck.DECK_HEIGHT/2);
+			}
 			decks.get(i).draw();
 		}
 		for (Card c : cards) {
@@ -51,10 +55,12 @@ public class DrawingSurface extends PApplet {
 				}
 			}
 			for (int i = decks.size() - 1; i >= 0; i--) {
-				if (lastClickedType == NONE && decks.get(i).hasPoint(mouseX, mouseY)) {
-					item = decks.get(i);
-					lastClickedType = DECK;
-					lastIndex = i;
+				if (lastClickedType == DECK && decks.get(i).isMovable()) {
+					decks.get(i).setX(mouseX-Deck.DECK_WIDTH/2);
+					decks.get(i).setY(mouseY-Deck.DECK_HEIGHT/2);
+					decks.get(i).setMovable(false);
+					decks.add(decks.remove(i));
+					lastClickedType = NONE;
 				}
 			}
 
@@ -67,6 +73,8 @@ public class DrawingSurface extends PApplet {
 						menu.getDeck().move();
 						menu = null;
 					} else if (menu.clicked(mouseX, mouseY) == 3) {
+						menu.getDeck().setMovable(true);
+						lastClickedType = DECK;
 						menu = null;
 					}
 				} else if (menu.getType() == Menu.MENU_GENERAL) {
@@ -103,7 +111,7 @@ public class DrawingSurface extends PApplet {
 	public void mouseDragged() {
 		float xShift = mouseX - prevX;
 		float yShift = mouseY - prevY;
-		if (lastClickedType != NONE) {
+		if (lastClickedType != NONE && lastClickedType != DECK) {
 			item.setX(item.getX() + xShift);
 			item.setY(item.getY() + yShift);
 		}
@@ -125,10 +133,10 @@ public class DrawingSurface extends PApplet {
 
 				}
 			}
-		} else if (lastClickedType == DECK) {
-			decks.add(decks.remove(lastIndex));
+			lastClickedType = NONE;
 		}
-		lastClickedType = NONE;
+		
+		
 	}
 
 	public void folderSelected(File selection) {

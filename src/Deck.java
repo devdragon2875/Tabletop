@@ -3,15 +3,27 @@ import java.util.Collections;
 
 import processing.core.PApplet;
 
-public class Deck extends Item{
+public class Deck{
 	private ArrayList<Card> deck = new ArrayList<Card>();
 	public static final float DECK_WIDTH= 120;
 	public static final float DECK_HEIGHT = 160;
 	private PApplet drawer;
 	private boolean isFaceDown;
+	private boolean isMovable = false;
+	private float x;
+	private float y;
 	
+	public boolean isMovable() {
+		return isMovable;
+	}
+
+	public void setMovable(boolean isMovable) {
+		this.isMovable = isMovable;
+	}
+
 	public Deck(PApplet drawer, ArrayList<Card> deck, float x, float y, boolean isFaceDown) {
-		super(x, y);
+		this.x = x;
+		this.y = y;
 		this.drawer = drawer;
 		if(deck != null) {
 			this.deck.addAll(deck);
@@ -63,6 +75,18 @@ public class Deck extends Item{
 
 	public void setDeck(ArrayList<Card> deck) {
 		this.deck = deck;
+	}
+	public float getX() {
+		return x;
+	}
+	public void setX(float x) {
+		this.x = x;
+	}
+	public float getY() {
+		return y;
+	}
+	public void setY(float y) {
+		this.y = y;
 	}
 	
 	
