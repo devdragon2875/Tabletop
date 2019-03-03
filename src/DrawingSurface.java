@@ -10,7 +10,7 @@ import processing.core.PApplet;
 import processing.core.PImage;
 
 public class DrawingSurface extends PApplet {
-	Client c;
+	//Client c;
 	
 	float prevX;
 	float prevY;
@@ -31,8 +31,8 @@ public class DrawingSurface extends PApplet {
 	}
 
 	public void setup() {
-		c = new Client("127.0.0.1", 4444);
-		c.connect();
+		//c = new Client("127.0.0.1", 4444);
+		//c.connect();
 
 	}
 
@@ -51,9 +51,9 @@ public class DrawingSurface extends PApplet {
 		if (menu != null) {
 			menu.draw();
 		}
-		String serializedObject = c.read();
+		/*String serializedObject = c.read();
 		if (serializedObject != null) {
-			// deserialize the object
+			 deserialize the object
 			
 			
 		}
@@ -66,7 +66,7 @@ public class DrawingSurface extends PApplet {
 				newDecks.get(i).draw();
 
 			}
-		}
+		}*/
 	}
 
 	public void mousePressed() {
@@ -99,9 +99,9 @@ public class DrawingSurface extends PApplet {
 					
 
 					for (int j = 0; j < decks.size(); j++) {// serialize the object
-						String serializedObject = "";
+						//String serializedObject = "";
 
-						c.write(serializedObject);
+						//c.write(serializedObject);
 					}
 					lastClickedType = NONE;
 				}
@@ -126,9 +126,9 @@ public class DrawingSurface extends PApplet {
 						decks.add(new Deck(this, null, menu.getX() + Menu.MENU_WIDTH / 2 - Deck.DECK_WIDTH / 2,
 								menu.getY() + Menu.MENU_HEIGHT - Deck.DECK_HEIGHT / 2, true));
 						for (int j = 0; j < decks.size(); j++) {// serialize the object
-							String serializedObject = "";
+							//String serializedObject = "";
 
-							c.write(serializedObject);
+							//c.write(serializedObject);
 						}
 						menu = null;
 					} else if (menu.clicked(mouseX, mouseY) == 2) {
@@ -207,8 +207,8 @@ public class DrawingSurface extends PApplet {
 				// }
 			}
 			decks.add(deck);
-			menu = null;
 		}
+		menu = null;
 	}
 
 }
