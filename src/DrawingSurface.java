@@ -1,11 +1,17 @@
 import java.awt.Color;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import processing.core.PApplet;
 import processing.core.PImage;
 
 public class DrawingSurface extends PApplet {
+	Client c;
+	
 	float prevX;
 	float prevY;
 	public static final int NONE = 0;
@@ -15,6 +21,8 @@ public class DrawingSurface extends PApplet {
 	int lastIndex;
 	Item item;
 	Menu menu;
+	// MyThread thread = new MyThread();
+	ArrayList<Deck> newDecks = new ArrayList<Deck>();;
 	ArrayList<Deck> decks = new ArrayList<Deck>();
 	ArrayList<Card> cards = new ArrayList<Card>();
 
@@ -23,15 +31,17 @@ public class DrawingSurface extends PApplet {
 	}
 
 	public void setup() {
+		c = new Client("127.0.0.1", 4444);
+		c.connect();
 
 	}
 
 	public void draw() {
-		background(0, 0, 0);
+		background(0, 180, 0);
 		for (int i = 0; i < decks.size(); i++) {
-			if(decks.get(i).isMovable()) {
-				decks.get(i).setX(mouseX-Deck.DECK_WIDTH/2);
-				decks.get(i).setY(mouseY-Deck.DECK_HEIGHT/2);
+			if (decks.get(i).isMovable()) {
+				decks.get(i).setX(mouseX - Deck.DECK_WIDTH / 2);
+				decks.get(i).setY(mouseY - Deck.DECK_HEIGHT / 2);
 			}
 			decks.get(i).draw();
 		}
@@ -41,12 +51,30 @@ public class DrawingSurface extends PApplet {
 		if (menu != null) {
 			menu.draw();
 		}
+		String serializedObject = c.read();
+		if (serializedObject != null) {
+			// deserialize the object
+			
+			
+		}
+		if (newDecks != null) {
+			for (int i = 0; i < newDecks.size(); i++) {
+				if (newDecks.get(i).isMovable()) {
+					newDecks.get(i).setX(mouseX - Deck.DECK_WIDTH / 2);
+					newDecks.get(i).setY(mouseY - Deck.DECK_HEIGHT / 2);
+				}
+				newDecks.get(i).draw();
+
+			}
+		}
 	}
 
 	public void mousePressed() {
+
 		prevX = mouseX;
 		prevY = mouseY;
 		if (mouseButton == LEFT) {
+
 			for (int i = cards.size() - 1; i >= 0; i--) {
 				if (lastClickedType == NONE && cards.get(i).hasPoint(mouseX, mouseY)) {
 					item = cards.get(i);
@@ -55,13 +83,29 @@ public class DrawingSurface extends PApplet {
 				}
 			}
 			for (int i = decks.size() - 1; i >= 0; i--) {
+				if (lastClickedType == NONE && decks.get(i).hasPoint(mouseX, mouseY)
+						&& decks.get(i).getDeck().size() > 0) {
+					cards.add(decks.get(i).getDeck().remove(decks.get(i).getDeck().size() - 1));
+					item = cards.get(cards.size() - 1);
+					lastIndex = cards.size() - 1;
+					lastClickedType = CARD;
+				}
 				if (lastClickedType == DECK && decks.get(i).isMovable()) {
-					decks.get(i).setX(mouseX-Deck.DECK_WIDTH/2);
-					decks.get(i).setY(mouseY-Deck.DECK_HEIGHT/2);
+					decks.get(i).setX(mouseX - Deck.DECK_WIDTH / 2);
+					decks.get(i).setY(mouseY - Deck.DECK_HEIGHT / 2);
 					decks.get(i).setMovable(false);
 					decks.add(decks.remove(i));
+
+					
+
+					for (int j = 0; j < decks.size(); j++) {// serialize the object
+						String serializedObject = "";
+
+						c.write(serializedObject);
+					}
 					lastClickedType = NONE;
 				}
+
 			}
 
 			if (menu != null) {
@@ -81,6 +125,11 @@ public class DrawingSurface extends PApplet {
 					if (menu.clicked(mouseX, mouseY) == 1) {
 						decks.add(new Deck(this, null, menu.getX() + Menu.MENU_WIDTH / 2 - Deck.DECK_WIDTH / 2,
 								menu.getY() + Menu.MENU_HEIGHT - Deck.DECK_HEIGHT / 2, true));
+						for (int j = 0; j < decks.size(); j++) {// serialize the object
+							String serializedObject = "";
+
+							c.write(serializedObject);
+						}
 						menu = null;
 					} else if (menu.clicked(mouseX, mouseY) == 2) {
 						cards.add(new Card(this, "faceup.png", "facedown.png",
@@ -92,10 +141,8 @@ public class DrawingSurface extends PApplet {
 					}
 
 				}
-				
-				
-			}
 
+			}
 		} else if (mouseButton == RIGHT) {
 			menu = new Menu(this, mouseX, mouseY, Menu.MENU_GENERAL, null);
 			for (int i = decks.size() - 1; i >= 0; i--) {
@@ -135,8 +182,7 @@ public class DrawingSurface extends PApplet {
 			}
 			lastClickedType = NONE;
 		}
-		
-		
+
 	}
 
 	public void folderSelected(File selection) {
@@ -149,16 +195,16 @@ public class DrawingSurface extends PApplet {
 			Deck deck = new Deck(this, null, menu.getX() + Menu.MENU_WIDTH / 2 - Deck.DECK_WIDTH / 2,
 					menu.getY() + Menu.MENU_HEIGHT - Deck.DECK_HEIGHT / 2, true);
 			for (int i = 0; i < listOfFiles.length; i++) {
-			  if (listOfFiles[i].isFile()) {
-			    System.out.println("File " + listOfFiles[i].getName());
-			    Card card = new Card(this, listOfFiles[i].getAbsolutePath(), "facedown.png",
-						menu.getX() + Menu.MENU_WIDTH / 2 - Deck.DECK_WIDTH / 2,
-						menu.getY() + Menu.MENU_HEIGHT - Deck.DECK_HEIGHT / 2, false);
-			    deck.getDeck().add(card);
-			  } 
-			  //else if (listOfFiles[i].isDirectory()) {
-			    //System.out.println("Directory " + listOfFiles[i].getName());
-			  //}
+				if (listOfFiles[i].isFile()) {
+					System.out.println("File " + listOfFiles[i].getName());
+					Card card = new Card(this, listOfFiles[i].getAbsolutePath(), "facedown.png",
+							menu.getX() + Menu.MENU_WIDTH / 2 - Deck.DECK_WIDTH / 2,
+							menu.getY() + Menu.MENU_HEIGHT - Deck.DECK_HEIGHT / 2, false);
+					deck.getDeck().add(card);
+				}
+				// else if (listOfFiles[i].isDirectory()) {
+				// System.out.println("Directory " + listOfFiles[i].getName());
+				// }
 			}
 			decks.add(deck);
 			menu = null;

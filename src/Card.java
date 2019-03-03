@@ -33,8 +33,6 @@ public class Card extends Item {
 		} else {
 			drawer.image(upImg, x, y, Deck.DECK_WIDTH, Deck.DECK_HEIGHT);
 		}
-		
-		drawer.text("this is a card", x, y);
 	}
 	//Getters and Setters
 	public float getX() {
