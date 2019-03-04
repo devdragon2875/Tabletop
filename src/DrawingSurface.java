@@ -21,6 +21,7 @@ public class DrawingSurface extends PApplet {
 	int lastIndex;
 	Item item;
 	Menu menu;
+	Hand hand;
 	// MyThread thread = new MyThread();
 	ArrayList<Deck> newDecks = new ArrayList<Deck>();;
 	ArrayList<Deck> decks = new ArrayList<Deck>();
@@ -31,6 +32,8 @@ public class DrawingSurface extends PApplet {
 	}
 
 	public void setup() {
+		hand = new Hand(this, null, 0, height-Deck.DECK_HEIGHT);
+		decks.add(hand);
 		//c = new Client("127.0.0.1", 4444);
 		//c.connect();
 
@@ -48,9 +51,11 @@ public class DrawingSurface extends PApplet {
 		for (Card c : cards) {
 			c.draw();
 		}
+		hand.draw();
 		if (menu != null) {
 			menu.draw();
 		}
+		
 		/*String serializedObject = c.read();
 		if (serializedObject != null) {
 			 deserialize the object

@@ -4,14 +4,14 @@ import java.util.Collections;
 import processing.core.PApplet;
 
 public class Deck{
-	private ArrayList<Card> deck = new ArrayList<Card>();
+	protected ArrayList<Card> deck = new ArrayList<Card>();
 	public static final float DECK_WIDTH= 120;
 	public static final float DECK_HEIGHT = 160;
-	private PApplet drawer;
+	protected PApplet drawer;
 	private boolean isFaceDown;
 	private boolean isMovable = false;
-	private float x;
-	private float y;
+	protected float x;
+	protected float y;
 	
 	public boolean isMovable() {
 		return isMovable;
