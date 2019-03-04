@@ -180,14 +180,32 @@ public class DrawingSurface extends PApplet {
 						menu = null;
 					}
 
+				} else if (menu.getType() == Menu.MENU_CARD) {
+					if (menu.clicked(mouseX, mouseY) == 1) {
+						menu.getCard().flip();
+						menu = null;
+					} else if (menu.clicked(mouseX, mouseY) == 2) {
+						
+						menu = null;
+					} else if (menu.clicked(mouseX, mouseY) == 3) {
+						
+						menu = null;
+					} else {
+						menu = null;
+					}
 				}
 
 			} 
 		} else if (mouseButton == RIGHT) {
-			menu = new Menu(this, mouseX, mouseY, Menu.MENU_GENERAL, null);
+			menu = new Menu(this, mouseX, mouseY, Menu.MENU_GENERAL, (Deck)null);
 			for (int i = decks.size() - 1; i >= 0; i--) {
 				if (decks.get(i).hasPoint(mouseX, mouseY)) {
 					menu = new Menu(this, mouseX, mouseY, Menu.MENU_DECK, decks.get(i));
+				}
+			}
+			for (int i = cards.size() - 1; i >= 0; i--) {
+				if (cards.get(i).hasPoint(mouseX, mouseY)) {
+					menu = new Menu(this, mouseX, mouseY, Menu.MENU_CARD, cards.get(i));
 				}
 			}
 
