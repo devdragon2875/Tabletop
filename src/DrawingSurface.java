@@ -156,7 +156,9 @@ public class DrawingSurface extends PApplet {
 						menu.getDeck().setMovable(true);
 						lastClickedType = DECK;
 						menu = null;
-					} 
+					} else {
+						menu = null;
+					}
 				} else if (menu.getType() == Menu.MENU_GENERAL) {
 					if (menu.clicked(mouseX, mouseY) == 1) {
 						decks.add(new Deck(this, null, menu.getX() + Menu.MENU_WIDTH / 2 - Deck.DECK_WIDTH / 2,
@@ -174,11 +176,13 @@ public class DrawingSurface extends PApplet {
 						menu = null;
 					} else if (menu.clicked(mouseX, mouseY) == 3) {
 						selectFolder("Select a Folder to import as a Deck:", "folderSelected");
+					} else {
+						menu = null;
 					}
 
 				}
 
-			}
+			} 
 		} else if (mouseButton == RIGHT) {
 			menu = new Menu(this, mouseX, mouseY, Menu.MENU_GENERAL, null);
 			for (int i = decks.size() - 1; i >= 0; i--) {
