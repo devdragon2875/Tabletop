@@ -1,4 +1,5 @@
 import processing.core.PApplet;
+import processing.core.PFont;
 
 public class Menu {
 	private float x;
@@ -6,83 +7,107 @@ public class Menu {
 	private int type;
 	private Deck deck;
 	private PApplet drawer;
-	public static final float MENU_WIDTH= 60;
-	public static final float MENU_HEIGHT = 90;
+	public static final float MENU_WIDTH = 120;
+	public static final float MENU_HEIGHT = 150;
+	private static final float BORDER_WIDTH = 20;
+	private static final float SPACE = 10;
+	private static final float NUM = 5;
 	public static final int MENU_GENERAL = 1;
-	public static final int MENU_DECK= 2;
-	
+	public static final int MENU_DECK = 2;
+	private PFont p;
+
 	public Menu(PApplet drawer, float x, float y, int menuDeck, Deck deck) {
-		this.x = x-MENU_WIDTH/2;
-		this.y = y-MENU_HEIGHT;
+		this.x = x - MENU_WIDTH / 2;
+		this.y = y - MENU_HEIGHT;
 		this.type = menuDeck;
 		this.deck = deck;
 		this.drawer = drawer;
+		p = drawer.createFont("Comic Sans MS", 12);
 	}
-	
-	
-
 
 	public int clicked(float pX, float pY) {
-		if(type == MENU_DECK) {
-			if(pX >= x && pY >= y && pX<= x+MENU_WIDTH && pY<= y+MENU_HEIGHT/3) {
-				return 1;
-			} else if(pX >= x && pY >= y + MENU_HEIGHT/3 && pX<= x+MENU_WIDTH && pY<= y+2*MENU_HEIGHT/3) {
-				return 2;
-			} else if(pX >= x && pY >= y+2*MENU_HEIGHT/3 && pX<= x+MENU_WIDTH && pY<= y+MENU_HEIGHT) {
-				return 3;
-			}
-		} else if(type == MENU_GENERAL) {
-			if(pX >= x && pY >= y && pX<= x+MENU_WIDTH && pY<= y+MENU_HEIGHT/3) {
-				return 1;
-			} else if(pX >= x && pY >= y + MENU_HEIGHT/3 && pX<= x+MENU_WIDTH && pY<= y+2*MENU_HEIGHT/3) {
-				return 2;
-			} else if(pX >= x && pY >= y+2*MENU_HEIGHT/3 && pX<= x+MENU_WIDTH && pY<= y+MENU_HEIGHT) {
-				return 3;
+		if (pX >= x && pX <= x + MENU_WIDTH) {
+			for (int i = 0; i < NUM; i++) {
+				if (pY >= y + i * MENU_HEIGHT / NUM && pY <= y + (i+1) * MENU_HEIGHT / NUM -SPACE) {
+					return i+1;
+				}
 			}
 		}
 		return 0;
 	}
-	
+
 	public void draw() {
-		if(type == MENU_DECK) {
+		if (type == MENU_DECK) {
 			drawer.fill(255);
-			drawer.text("Shuffle", x, y);
+			drawer.rect(x - BORDER_WIDTH, y - BORDER_WIDTH, MENU_WIDTH + BORDER_WIDTH * 2, MENU_HEIGHT + BORDER_WIDTH);
 			
-			drawer.fill(180, 0, 0);
-			drawer.rect(x, y, MENU_WIDTH, MENU_HEIGHT/3);
+			for(int i = 0; i < NUM; i++) {
+				
+				drawer.fill(150);
+				drawer.rect(x, y + i*MENU_HEIGHT/NUM, MENU_WIDTH, MENU_HEIGHT / NUM- SPACE);
+				drawer.textAlign(drawer.CENTER, drawer.CENTER);
+				drawer.textFont(p);
+				//drawer.textSize(27);
+				if(i+1 == 1) {
+					drawer.fill(255);
+					drawer.text("SHUFFLE", x+MENU_WIDTH/2, y + i*MENU_HEIGHT/NUM +MENU_HEIGHT/(2*NUM)-SPACE);
+				}
+				if(i+1 == 2) {
+					drawer.fill(255);
+					drawer.text("UMM", x+MENU_WIDTH/2, y + i*MENU_HEIGHT/NUM+MENU_HEIGHT/(2*NUM)-SPACE);
+				}
+				if(i+1 == 3) {
+					drawer.fill(255);
+					drawer.text("MOVE", x+MENU_WIDTH/2, y + i*MENU_HEIGHT/NUM+MENU_HEIGHT/(2*NUM)-SPACE);
+				}
+				if(i+1 == 4) {
+					drawer.fill(255);
+					drawer.text("Other 1", x+MENU_WIDTH/2, y + i*MENU_HEIGHT/NUM+MENU_HEIGHT/(2*NUM)-SPACE);
+				}
+				if(i+1 == 5) {
+					drawer.fill(255);
+					drawer.text("Other 2", x+MENU_WIDTH/2, y + i*MENU_HEIGHT/NUM+MENU_HEIGHT/(2*NUM)-SPACE);
+				}
+			}
 			
+
 			drawer.fill(255);
-			drawer.text("Draw", x, y+MENU_HEIGHT/3);
-			
-			drawer.fill(0, 180, 0);
-			drawer.rect(x, y+MENU_HEIGHT/3, MENU_WIDTH, MENU_HEIGHT/3);
-			
+		} else if (type == MENU_GENERAL) {
 			drawer.fill(255);
-			drawer.text("Yiggity", x, y+2*+MENU_HEIGHT/3);
+			drawer.rect(x - BORDER_WIDTH, y - BORDER_WIDTH, MENU_WIDTH + BORDER_WIDTH * 2, MENU_HEIGHT + BORDER_WIDTH);
 			
-			drawer.fill(0, 0, 180);
-			drawer.rect(x, y+2*+MENU_HEIGHT/3, MENU_WIDTH, MENU_HEIGHT/3);
+			for(int i = 0; i < NUM; i++) {
+				
+				drawer.fill(150);
+				drawer.rect(x, y + i*MENU_HEIGHT/NUM, MENU_WIDTH, MENU_HEIGHT / NUM - SPACE);
+				drawer.textAlign(drawer.CENTER, drawer.CENTER);
+				drawer.textFont(p);
+				//drawer.textSize(27);
+				if(i+1 == 1) {
+					drawer.fill(255);
+					drawer.text("DECK", x+MENU_WIDTH/2, y + i*MENU_HEIGHT/NUM +MENU_HEIGHT/(2*NUM)-SPACE);
+				}
+				if(i+1 == 2) {
+					drawer.fill(255);
+					drawer.text("CARD", x+MENU_WIDTH/2, y + i*MENU_HEIGHT/NUM+MENU_HEIGHT/(2*NUM)-SPACE);
+				}
+				if(i+1 == 3) {
+					drawer.fill(255);
+					drawer.text("IMPORT", x+MENU_WIDTH/2, y + i*MENU_HEIGHT/NUM+MENU_HEIGHT/(2*NUM)-SPACE);
+				}
+				if(i+1 == 4) {
+					drawer.fill(255);
+					drawer.text("Other 1", x+MENU_WIDTH/2, y + i*MENU_HEIGHT/NUM+MENU_HEIGHT/(2*NUM)-SPACE);
+				}
+				if(i+1 == 5) {
+					drawer.fill(255);
+					drawer.text("Other 2", x+MENU_WIDTH/2, y + i*MENU_HEIGHT/NUM+MENU_HEIGHT/(2*NUM)-SPACE);
+				}
+			}
 			
-			drawer.fill(255);
-		} else if(type == MENU_GENERAL) {
-			drawer.fill(255);
-			drawer.text("Create Deck", x, y);
+
 			
-			drawer.fill(180, 0, 0);
-			drawer.rect(x, y, MENU_WIDTH, MENU_HEIGHT/3);
-			
-			drawer.fill(255);
-			drawer.text("Create Card", x, y+MENU_HEIGHT/3);
-			
-			drawer.fill(0, 180, 0);
-			drawer.rect(x, y+MENU_HEIGHT/3, MENU_WIDTH, MENU_HEIGHT/3);
-			
-			drawer.fill(255);
-			drawer.text("Import Deck", x, y+2*+MENU_HEIGHT/3);
-			
-			drawer.fill(0, 0, 180);
-			drawer.rect(x, y+2*+MENU_HEIGHT/3, MENU_WIDTH, MENU_HEIGHT/3);
-			
+
 			drawer.fill(255);
 		}
 	}
@@ -96,6 +121,7 @@ public class Menu {
 		// TODO Auto-generated method stub
 		return deck;
 	}
+
 	public float getX() {
 		return x;
 	}
@@ -103,5 +129,5 @@ public class Menu {
 	public float getY() {
 		return y;
 	}
-	
+
 }
