@@ -76,6 +76,7 @@ public class DrawingSurface extends PApplet {
 			cardViewer.setCard(null);
 		}
 		
+		
 		/*String serializedObject = c.read();
 		if (serializedObject != null) {
 			 deserialize the object
@@ -150,7 +151,10 @@ public class DrawingSurface extends PApplet {
 						menu.getDeck().shuffle();
 						menu = null;
 					} else if (menu.clicked(mouseX, mouseY) == 2) {
-						
+						menu.getDeck().setFaceDown(!menu.getDeck().isFaceDown());
+						for(int i = 0; i < menu.getDeck().getDeck().size(); i++) {
+							menu.getDeck().getDeck().get(i).flip();
+						}
 						menu = null;
 					} else if (menu.clicked(mouseX, mouseY) == 3) {
 						menu.getDeck().setMovable(true);
@@ -230,18 +234,21 @@ public class DrawingSurface extends PApplet {
 			boolean satisfied = false;
 			for (int i = decks.size() - 1; i >= 0; i--) {
 				if (!satisfied && decks.get(i).hasPoint(mouseX, mouseY)) {
-					if (decks.get(i).isFaceDown() && !cards.get(lastIndex).getIsFaceDown()) {
+					if (decks.get(i).isFaceDown() != cards.get(lastIndex).getIsFaceDown()) {
 						cards.get(lastIndex).flip();
 					}
 					decks.get(i).getDeck().add(cards.remove(lastIndex));
 					satisfied = true;
-
+					cardViewer.setCard(null);
 				}
 			}
 			if (!satisfied && hand.hasPoint(mouseX, mouseY)) {
-				
+				if (hand.isFaceDown() != cards.get(lastIndex).getIsFaceDown()) {
+					cards.get(lastIndex).flip();
+				}
 				hand.getDeck().add(cards.remove(lastIndex));
 				satisfied = true;
+				cardViewer.setCard(null);
 			}
 			//if(!satisfied) {
 				//cards.add(cards.remove(lastIndex));

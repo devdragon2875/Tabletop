@@ -64,7 +64,7 @@ public class Menu {
 				}
 				if(i+1 == 2) {
 					drawer.fill(255);
-					drawer.text("UMM", x+MENU_WIDTH/2, y + i*MENU_HEIGHT/NUM+MENU_HEIGHT/(2*NUM)-SPACE);
+					drawer.text("FLIP", x+MENU_WIDTH/2, y + i*MENU_HEIGHT/NUM+MENU_HEIGHT/(2*NUM)-SPACE);
 				}
 				if(i+1 == 3) {
 					drawer.fill(255);
