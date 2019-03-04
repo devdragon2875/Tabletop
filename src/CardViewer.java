@@ -26,6 +26,10 @@ public class CardViewer {
 	}
 	
 	public void setCard(Card card) {
-		this.card = new Card(card);
+		if(card == null) {
+			this.card = null;
+		} else {
+			this.card = new Card(card);
+		}
 	}
 }

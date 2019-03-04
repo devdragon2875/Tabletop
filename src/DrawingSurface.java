@@ -61,11 +61,13 @@ public class DrawingSurface extends PApplet {
 		
 		//CardViewer Stuff
 		cardViewer.draw();
-		for(Card c : cards) {
+		for(int i = cards.size()-1; i >=0; i--) {
+			Card c = cards.get(i);
 			if(c.hasPoint(mouseX, mouseY)) {
 				cardViewer.setCard(c);
 				break;
 			}
+			cardViewer.setCard(null);
 		}
 		
 		/*String serializedObject = c.read();
@@ -197,6 +199,9 @@ public class DrawingSurface extends PApplet {
 
 				}
 			}
+			//if(!satisfied) {
+				//cards.add(cards.remove(lastIndex));
+			//}
 			lastClickedType = NONE;
 		}
 
