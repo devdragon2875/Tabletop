@@ -17,11 +17,12 @@ public class Hand extends Deck {
 	public void draw() {
 		rearrange();
 		
-		drawer.fill(255, 0, 255);
+		drawer.fill(255);
 		drawer.rect(x, y, DECK_WIDTH*10, DECK_HEIGHT);
 		for(int i = 0; i < deck.size(); i++) {
 			deck.get(i).draw();
 		}
+		
 	}
 	
 	// sets position of cards. Please call every time amount/position of cards in hand changes.

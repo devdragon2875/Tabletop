@@ -9,8 +9,8 @@ public class Menu {
 	private PApplet drawer;
 	public static final float MENU_WIDTH = 120;
 	public static final float MENU_HEIGHT = 150;
-	private static final float BORDER_WIDTH = 20;
-	private static final float SPACE = 10;
+	private static final float BORDER_WIDTH = 15;
+	private static final float SPACE = 6;
 	private static final float NUM = 5;
 	public static final int MENU_GENERAL = 1;
 	public static final int MENU_DECK = 2;
@@ -22,7 +22,7 @@ public class Menu {
 		this.type = menuDeck;
 		this.deck = deck;
 		this.drawer = drawer;
-		p = drawer.createFont("Comic Sans MS", 12);
+		p = drawer.createFont("Sitka Heading Bold", 20);
 	}
 
 	public int clicked(float pX, float pY) {
@@ -39,12 +39,12 @@ public class Menu {
 	public void draw() {
 		if (type == MENU_DECK) {
 			drawer.fill(255);
-			drawer.rect(x - BORDER_WIDTH, y - BORDER_WIDTH, MENU_WIDTH + BORDER_WIDTH * 2, MENU_HEIGHT + BORDER_WIDTH);
+			drawer.rect(x - BORDER_WIDTH, y - BORDER_WIDTH, MENU_WIDTH + BORDER_WIDTH * 2, MENU_HEIGHT + BORDER_WIDTH, 20);
 			
 			for(int i = 0; i < NUM; i++) {
 				
-				drawer.fill(150);
-				drawer.rect(x, y + i*MENU_HEIGHT/NUM, MENU_WIDTH, MENU_HEIGHT / NUM- SPACE);
+				drawer.fill(200);
+				drawer.rect(x, y + i*MENU_HEIGHT/NUM, MENU_WIDTH, MENU_HEIGHT / NUM- SPACE, 5);
 				drawer.textAlign(drawer.CENTER, drawer.CENTER);
 				drawer.textFont(p);
 				//drawer.textSize(27);
@@ -74,26 +74,25 @@ public class Menu {
 			drawer.fill(255);
 		} else if (type == MENU_GENERAL) {
 			drawer.fill(255);
-			drawer.rect(x - BORDER_WIDTH, y - BORDER_WIDTH, MENU_WIDTH + BORDER_WIDTH * 2, MENU_HEIGHT + BORDER_WIDTH);
-			
+			drawer.rect(x - BORDER_WIDTH, y - BORDER_WIDTH, MENU_WIDTH + BORDER_WIDTH * 2, MENU_HEIGHT + BORDER_WIDTH, 20);
 			for(int i = 0; i < NUM; i++) {
 				
-				drawer.fill(150);
-				drawer.rect(x, y + i*MENU_HEIGHT/NUM, MENU_WIDTH, MENU_HEIGHT / NUM - SPACE);
+				drawer.fill(200);
+				drawer.rect(x, y + i*MENU_HEIGHT/NUM, MENU_WIDTH, MENU_HEIGHT / NUM - SPACE, 5);
 				drawer.textAlign(drawer.CENTER, drawer.CENTER);
 				drawer.textFont(p);
 				//drawer.textSize(27);
 				if(i+1 == 1) {
 					drawer.fill(255);
-					drawer.text("DECK", x+MENU_WIDTH/2, y + i*MENU_HEIGHT/NUM +MENU_HEIGHT/(2*NUM)-SPACE);
+					drawer.text("Create Deck", x+MENU_WIDTH/2, y + i*MENU_HEIGHT/NUM +MENU_HEIGHT/(2*NUM)-SPACE);
 				}
 				if(i+1 == 2) {
 					drawer.fill(255);
-					drawer.text("CARD", x+MENU_WIDTH/2, y + i*MENU_HEIGHT/NUM+MENU_HEIGHT/(2*NUM)-SPACE);
+					drawer.text("Create Card", x+MENU_WIDTH/2, y + i*MENU_HEIGHT/NUM+MENU_HEIGHT/(2*NUM)-SPACE);
 				}
 				if(i+1 == 3) {
 					drawer.fill(255);
-					drawer.text("IMPORT", x+MENU_WIDTH/2, y + i*MENU_HEIGHT/NUM+MENU_HEIGHT/(2*NUM)-SPACE);
+					drawer.text("Import", x+MENU_WIDTH/2, y + i*MENU_HEIGHT/NUM+MENU_HEIGHT/(2*NUM)-SPACE);
 				}
 				if(i+1 == 4) {
 					drawer.fill(255);

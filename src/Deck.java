@@ -50,6 +50,7 @@ public class Deck{
 		
 	}
 	public void draw() {
+		drawer.fill(255);
 		drawer.rect(x, y, DECK_WIDTH, DECK_HEIGHT);
 		for(int i = 0; i < deck.size(); i++) {
 			deck.get(i).setX(x);
