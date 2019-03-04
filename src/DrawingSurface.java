@@ -131,13 +131,13 @@ public class DrawingSurface extends PApplet {
 
 					
 
-					/*for (int j = 0; j < decks.size(); j++) {
+					
 						// serialize the object
-						//String serializedObject = "";
+					//String serializedObject = "D";
 
-						//c.write(serializedObject);
-					}
-					*/
+					//c.write(serializedObject);
+					
+					
 					lastClickedType = NONE;
 				}
 
