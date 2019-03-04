@@ -8,6 +8,14 @@ public class Card extends Item {
 	
 	private boolean isFaceDown;
 	
+	public Card(Card other) {
+		super(other.x, other.y);
+		this.drawer = other.drawer;
+		this.upImg = other.upImg;
+		this.downImg = other.downImg;
+		this.isFaceDown = other.isFaceDown;
+	}
+	
 	public Card(PApplet drawer, String upImg, String downImg, float x, float y, boolean facedown) {
 		super(x, y);
 		this.upImg = drawer.loadImage(upImg);
@@ -52,6 +60,12 @@ public class Card extends Item {
 	}
 	public void setIsFaceDown(boolean facedown) {
 		isFaceDown = facedown;
+	}
+	public PImage getUpImg() {
+		return upImg;
+	}
+	public PImage getDownImg() {
+		return downImg;
 	}
 
 }
