@@ -30,6 +30,7 @@ public class DrawingSurface extends PApplet {
 	CardViewer cardViewer;
 
 	public void settings() {
+		//size(1600, 1040);
 		fullScreen();
 	}
 
