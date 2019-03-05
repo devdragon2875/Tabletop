@@ -66,6 +66,7 @@ public class DrawingSurface extends PApplet {
 		}
 		
 		//CardViewer Stuff
+		
 		cardViewer.draw();
 		for(int i = cards.size()-1; i >=0; i--) {
 			Card c = cards.get(i);
