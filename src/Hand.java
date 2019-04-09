@@ -18,7 +18,7 @@ public class Hand extends Deck {
 		rearrange();
 		
 		drawer.fill(255);
-		drawer.rect(x, y, DECK_WIDTH*10, DECK_HEIGHT);
+		drawer.rect(x, y, DECK_WIDTH*10, DECK_HEIGHT, 30);
 		for(int i = 0; i < deck.size(); i++) {
 			deck.get(i).draw();
 		}
